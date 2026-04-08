@@ -1,0 +1,54 @@
+# ── Python environment ─────────────────────────────────────────
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Conda ──────────────────────────────────────────────────────
+.conda/
+
+# ── Data files — never commit raw or processed data ───────────
+data/raw/
+data/processed/
+data/outputs/
+
+# ── Model files — too large for git ───────────────────────────
+*.json
+*.pkl
+*.parquet
+*.gz
+*.csv
+
+# ── Environment variables — contains DB credentials ───────────
+.env
+
+# ── Power BI ──────────────────────────────────────────────────
+*.pbix
+
+# ── VS Code ───────────────────────────────────────────────────
+.vscode/
+
+# ── Jupyter ───────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── OS files ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Temporary files ───────────────────────────────────────────
+*.tmp
+check_progress.py
+test_db.py
