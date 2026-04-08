@@ -68,26 +68,56 @@ decision rather than obscured.
 ---
 
 ## Project Structure
-banking-transaction-driven-loan-analytics/
-├── src/
-│   ├── config.py                 # paths, seeds, hyperparameters
-│   ├── data_loader.py            # PaySim + Lending Club ingestion
-│   ├── feature_engineering.py   # behavioral + loan features, cohort join
-│   ├── model_xgb.py             # XGBoost classifier, GPU training
-│   ├── model_sarimax.py         # SARIMAX forecasting, HW benchmark
-│   ├── score_customer.py        # interactive single-customer scorer
-│   └── forecast_query.py        # interactive segment forecast queries
-├── sql/
-│   ├── create_tables.sql        # star schema DDL
-│   ├── create_views.sql         # 4 analytical views
-│   ├── load_to_postgres.py      # parquet → PostgreSQL loader
-│   └── create_views.py          # view runner
-├── powerbi/                     # .pbix files (gitignored)
-├── data/                        # gitignored — download from Kaggle
-├── run_pipeline.py              # end-to-end runner
-└── README.md
 
----
+```
+banking-risk-analytics/
+│
+├── src/
+│   ├── config.py                    # Centralized paths, seeds, and hyperparameters
+│   ├── data_loader.py               # PaySim and Lending Club ingestion and cleaning
+│   ├── feature_engineering.py       # Behavioral + loan features, synthetic cohort assignment
+│   ├── model_xgb.py                 # XGBoost GPU classifier, evaluation, SHAP explainability
+│   ├── model_sarimax.py             # SARIMAX forecasting per segment, Holt-Winters benchmark
+│   ├── score_customer.py            # Interactive single-customer default scorer
+│   └── forecast_query.py            # Interactive segment cash flow forecast queries
+│
+├── sql/
+│   ├── create_tables.sql            # Star schema DDL — all 9 tables
+│   ├── create_views.sql             # 4 analytical views
+│   ├── load_to_postgres.py          # Parquet and CSV outputs → PostgreSQL loader
+│   └── create_views.py             # View creation runner with verification
+│
+├── data/
+│   ├── raw/                         # Place Kaggle downloads here (gitignored)
+│   │   ├── paysim.csv
+│   │   └── lending_club.csv.gz
+│   ├── processed/                   # Intermediate parquet files (gitignored)
+│   │   ├── paysim_clean.parquet
+│   │   ├── lending_club_clean.parquet
+│   │   ├── txn_features.parquet
+│   │   ├── loan_features.parquet
+│   │   └── master_features.parquet
+│   └── outputs/                     # Model outputs (gitignored)
+│       ├── xgb_predictions.parquet
+│       ├── xgb_metrics.csv
+│       ├── xgb_decile_analysis.csv
+│       ├── xgb_feature_importance.csv
+│       ├── xgb_shap_importance.csv
+│       ├── xgb_reason_codes.csv
+│       ├── xgb_model.json
+│       ├── sarimax_forecasts.parquet
+│       └── sarimax_metrics.csv
+│
+├── powerbi/                         # Power BI dashboard files (gitignored)
+│   └── Banking_Transaction_Loan_Analytics.pbix
+│
+├── notebooks/                       # Exploratory notebooks (optional)
+│
+├── .env                             # Database credentials (gitignored)
+├── .gitignore
+├── run_pipeline.py                  # End-to-end pipeline runner
+└── README.md
+```
 
 ## Phase 1 — Feature Engineering
 
